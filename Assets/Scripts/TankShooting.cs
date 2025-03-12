@@ -3,9 +3,9 @@ using System.Collections;
 
 public class TankShooting : MonoBehaviour
 {
-    public GameObject bulletPrefab;
-    public Transform firePoint;
-    public float bulletSpeed = 10f;
+    public GameObject bulletPrefab; // Prefab del proyectil
+    public Transform firePoint; // Lugar desde donde se dispara
+    public float bulletSpeed = 15f;
 
     void Update()
     {
@@ -17,9 +17,14 @@ public class TankShooting : MonoBehaviour
 
     void Shoot()
     {
+        // Instanciar la Bullet en la posición del FirePoint
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+
+        // Obtener el Rigidbody y aplicar velocidad
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         rb.velocity = firePoint.forward * bulletSpeed;
-        Destroy(bullet, 3f); // Desaparece en 3 segundos (corutina)
+
+        // Destruir la Bullet después de 3 segundos
+        Destroy(bullet, 3f);
     }
 }
